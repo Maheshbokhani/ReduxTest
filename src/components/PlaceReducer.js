@@ -1,4 +1,3 @@
-
 import { ADD_PLACE } from './Types';
 
 const initialState = {

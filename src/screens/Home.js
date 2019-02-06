@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View,Text,TouchableOpacity, TextInput, Button,ImageBackground, FlatList } from 'react-native';
+import { StyleSheet, View,Text,TouchableOpacity, TextInput, FlatList } from 'react-native';
 import ListItem from '../components/ListItem';
 import { connect } from 'react-redux';
 import { addPlace } from '../components/Place';
@@ -10,7 +10,6 @@ class Home extends React.Component {
    state = {
     placeName: '',
     places: [],
-  
   }
 
 placeSubmitHandler = () => {
@@ -29,20 +28,6 @@ placeNameChangeHandler = (value) => {
   });    
 }
 
-placesOutput = () => {
-   return (
-    <FlatList style = { styles.listContainer }
-      data = { this.props.places }
-      keyExtractor={(item, index) => index.toString()}
-      renderItem = { info => (
-        <ListItem 
-          placeName={ info.item.value }
-        />
-      )}
-    />
-  )
-}
-
 render() {
    return (
     
@@ -54,21 +39,32 @@ render() {
           placeholder = "Enter Places"
           style = { styles.placeInput }
           value = { this.state.placeName }
-          onChangeText = { this.placeNameChangeHandler }
-        ></TextInput>
+          onChangeText = { this.placeNameChangeHandler }>
+        </TextInput>
+
+       
        
         </View>
-
-        <TouchableOpacity
+    
+     <TouchableOpacity
          
           style = { styles.placeButton }
           onPress = { this.placeSubmitHandler }
-        >
+         >
         <Text style={{fontSize:15,color:'black',height:40,alignItems:'center',padding:10}}> ADD </Text>
+        
         </TouchableOpacity>
        
          <View style = { styles.listContainer }>
-          { this.placesOutput() }
+         <FlatList style = { styles.listContainer }
+          data = { this.props.places }
+          keyExtractor={(item, index) => index.toString()}
+          renderItem = { info => (
+         <ListItem 
+          placeName={ info.item.value }
+         />
+       )}
+      />
         </View>
       </View>
     );
@@ -80,7 +76,6 @@ const styles = StyleSheet.create({
     flex:1,
     borderRadius:1,
     backgroundColor: '#BFFDFB',
-  
     alignItems: 'center',
   },
   container1:{
@@ -94,7 +89,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     marginLeft:10,
     marginBottom:10,
-    marginTop:45,
+    marginTop:25,
     marginRight:10,
   //  flexDirection: 'column',
     alignItems: 'center',
