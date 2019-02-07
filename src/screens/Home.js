@@ -17,7 +17,7 @@ placeSubmitHandler = () => {
     if(this.state.placeName.trim() === '') {
       return;
     }
-   // this.setState({ placeName:''})
+    this.setState({ placeName:''})
     this.props.add(this.state.placeName);
     
 }
