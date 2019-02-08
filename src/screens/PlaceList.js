@@ -42,13 +42,9 @@ const styles = StyleSheet.create({
       marginTop:10,
       backgroundColor: '#BFFDFB',
       flexDirection:'column',
-     
-     
-  },
-  
+    },
 }
 )
-
 
 const mapStateToProps = state => {
   return {
@@ -63,8 +59,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-
-
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

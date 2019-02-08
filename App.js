@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, View, Text,TouchableOpacity,StyleSheet,ImageBackground } from 'react-native';
+import { View, Text,TouchableOpacity,StyleSheet,ImageBackground,BackHandler } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation'; // Version can be specified in package.json
 import Home from './src/screens/Home'
 import Placelist from './src/screens/PlaceList'
- import { ScrollView } from 'react-native-gesture-handler';
+
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -21,36 +21,50 @@ class HomeScreen extends React.Component {
     },
    
     headerLeft: (
-      <TouchableOpacity onPress={this.back}>
+      <TouchableOpacity onPress={()=>BackHandler.exitApp()}>
       <ImageBackground
       
        style={{ width: 30, height: 30,marginLeft:5 ,marginTop:5 }}
       resizeMode="stretch"
       source={require('./src/assets/images/back.png')}
-     />
-  </TouchableOpacity>
-    ),
-
+       />
+    </TouchableOpacity>
+   
+   ),
+  } 
+  back = ()=>{
+    BackHandler.exitApp()
   }
+
 render() {
    
     return (
-     <ScrollView style={{flex:1,backgroundColor:'#BFFDFB'}}>
-      <View style={{ flex: 1,justifyContent:'center',alignItems:'center',backgroundColor: '#BFFDFB',}}>
+    
+      <View style={{flex:1,backgroundColor: '#BFFDFB'}}>
+      <View style={{flex:0.9, justifyContent:'center',alignItems:'center',backgroundColor: '#BFFDFB'}}>
        <Home/>
-       <TouchableOpacity
-         
-         style = { styles.checkButton }
+       </View>
+       
+       <View style={{flex:0.1,alignItems:'flex-end'}}>
+      <TouchableOpacity
+        style = { styles.checkButton }
          onPress={() => this.props.navigation.navigate('Details')} 
        >
-       <Text style={{fontSize:15,color:'black',paddingLeft:30}}> Check Places </Text>
+      
+      <ImageBackground
+       style={{ width: 40, height: 40 }}
+       resizeMode="stretch"
+       source={require('./src/assets/images/next.png')}
+       />
        </TouchableOpacity>
+       </View>
 
          </View>
-      </ScrollView>
+    
     );
   }
 }
+
 class DisplayScreen extends React.Component {
   
   static navigationOptions = {
@@ -61,7 +75,7 @@ class DisplayScreen extends React.Component {
       backgroundColor:'#C2ACEE'
     },
     headerTitleStyle: {
-     // fontWeight: 'bold',
+    
       fontSize:25,
       flex:1,
      
@@ -70,7 +84,7 @@ class DisplayScreen extends React.Component {
  render() {
     return (
      
-      <View style={{ flex: 1,}}>
+      <View style={{ flex: 1}}>
         
         <Placelist/>
 
@@ -81,12 +95,11 @@ class DisplayScreen extends React.Component {
 }
 const styles = StyleSheet.create({
   checkButton: {
-    width:150,
-    marginBottom:50,
-    height:40,
-    backgroundColor:'#03E9DA',
-    justifyContent:'space-around',
-    borderRadius:7
+    
+    marginBottom:20,
+    marginRight:20,
+ 
+    justifyContent:'flex-end',
   },
 }
 )
